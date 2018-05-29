@@ -1,0 +1,86 @@
+---
+layout:     post
+title:      "数据类型的判断（JavaScript）"
+subtitle:   "JS中判断数据类型的三种方法"
+date:       2018-05-29 16:04:00
+author:     "pompeygao"
+header-img: "img/post-bg-js-version.jpg"
+tags:
+    - JavaScript
+---
+
+## 数据类型
+
+> 6种 原始类型 primitive type，直接取值:
+
+>> Boolean
+>> Null
+>> Undefined
+>> Number
+>> String
+>> Symbol (ES6 新定义)
+
+_注意：原始类型不包含_ Object。
+
+**三种判断数据类型的方法**
+1. **`typeof`**
+```js
+typeof null =='object'  // true 
+typeof [] =='object' // true 
+typeof {} =='object' // true 
+```
+`typeof`一般只能返回如下几个结果：`number, boolean, string, function, object, undefined`.
+
+在实际的项目应用中，`typeof`只有两个用途，就是检测一个元素是否为`undefined`，或者是否为`function`。
+
+为何呢？我们可以使用`typeof`来获取一个变量是否存在，如`if(typeof a!="undefined"){}`，而不要去使用if(a)因为如果a不存在（未声明）则会出错，对于`Array, null`等特殊对象使用`typeof`一律返回`object`，这正是`typeof`的局限性。
+
+2. **`instanceof`**
+
+所有可以通过构造函数创建的对象都可以用` instanceof` 检查。
+
+`instanceof `是用来判断 A 是否为 B 的实例对，表达式为：`A instanceof B`，如果A是B的实例，则返回`true`,否则返回`false`。 在这里需要特别注意的是：`instanceof`检测的是**原型**。当 A 的 `proto `指向 B 的 `prototype` 时，就认为A就是B的实例。如：
+```js
+let a=new Array();
+alert(a instanceof Array);  // true
+alert(a instanceof Object) // true
+```
+这是因为```Array是object的子类```。
+
+我们发现，虽然 `instanceof `能够判断出 [] 是`Array`的实例，但它认为 [] 也是`Object`的实例，为什么呢？ 我们来分析一下`[]、Array、Object` 三者之间的关系: 从`instanceof` 能够判断出` [].proto `指向 `Array.prototype`， 而 `Array.prototype.proto` 又指向了`Object.prototype，Object.prototype.proto `指向了`null,`标志着原型链的结束。因此，`[]、Array、Object`就形成了如下图所示的一条原型链：
+
+![image](https://user-images.githubusercontent.com/17947266/40645009-9f1f74d2-6357-11e8-8e88-b31fdcaea332.png)
+
+从原型链可以看出，`[] 的 proto 直接指向Array.prototype`, 间接指向`Object.prototype`, 所以按照 `instanceof `的判断规则，`[] 就是Object`的实例。当然，类似的`new Date()、new Person() `也会形成这样一条原型链。
+
+因此，`instanceof `只能用来判断两个对象是否属于原型链的关系， 而不能获取对象的具体类型。
+
+谈到`instanceof`我们要多插入一个问题，就是`function的arguments`，我们大家也许都认为`arguments`是一个Array，但如果使用`instaceof`去测试会发现`arguments不是一个Array`对象，尽管看起来很像。
+
+`x instanceof Array`
+看上去不错？可惜这不是最佳答案！问题在于`window.Array乃至[].constructor`都不100%靠谱，因为检查的值可能来自另外一个 frame 也就是要算上执行环境的话，你怎么知道 `Object.prototype.toString` 没有被事先重载过？
+
+
+公认的靠谱解法是
+`Object.prototype.toString.call(x) === '[object Array]'`
+
+3. **`Object.prototype.toString`**
+
+`toString`是`Object`原型对象上的一个方法，该方法默认返回其调用者的具体类型，更严格的讲，是 `toString运行时this`指向的对象类型, 返回的类型格式为`[object,xxx],xxx`是具体的数据类型，其中包括：`String,Number,Boolean,Undefined,Null,Function,Date,Array,RegExp,Error,HTMLDocument,... `基本上所有对象的类型都可以通过这个方法获取到。
+```js
+Object.prototype.toString.call('') ;   // [object String]
+Object.prototype.toString.call(1) ;    // [object Number]
+Object.prototype.toString.call(true) ; // [object Boolean]
+Object.prototype.toString.call(undefined) ; // [object Undefined]
+Object.prototype.toString.call(null) ; // [object Null]
+Object.prototype.toString.call(new Function()) ; // [object Function]
+Object.prototype.toString.call(new Date()) ; // [object Date]
+Object.prototype.toString.call([]) ; // [object Array]
+Object.prototype.toString.call(new RegExp()) ; // [object RegExp]
+Object.prototype.toString.call(new Error()) ; // [object Error]
+Object.prototype.toString.call(document) ; // [object HTMLDocument]
+Object.prototype.toString.call(window) ; //[object global] window是全局对象global的引用
+```
+
+需要注意的是，必须通过`Object.prototype.toString.call`来获取，而不能直接 `new Date().toString()`, 从原型链的角度讲，所有对象的原型链最终都指向了`Object`, 按照JS变量查找规则，其他对象应该也可以直接访问到`Object的toString`方法，而事实上，大部分的对象都实现了自身的`toString`方法，这样就可能会导致`Object的toString`被终止查找，因此要用call来强制执行`Object的toString`方法。
+
