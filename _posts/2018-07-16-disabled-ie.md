@@ -6,7 +6,8 @@ date:       2018-07-16 14:12:06
 author:     "pompeygao"
 header-img: "img/post-bg-js-version.jpg"
 tags:
-    - react css
+    - 前端开发 
+    - react
 ---
 
 ## 问题描述
@@ -14,7 +15,8 @@ tags:
 如下代码，将`<a/>`赋予`disabled`，在chrome浏览器中，`<a/>`样式也变成了灰色，点击`<a/>`无任何反应，这是我们想要的效果；
 在IE11浏览器中，`<a/>`样式也变成了灰色，但是点击仍然可以进行操作，说明在IE11下面是有问题的。
 
-![IE](../img/in-post/disabled-ie/IE1.png)
+![disabled-in-ie11](/img/in-post/disabled-ie/IE1.png)
+<small class="img-hint">图</small>
 ```js
 columns = [
     {
