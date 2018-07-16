@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "<a />的diabled属性在IE仍可点击解决办法"
-subtitle:   "<a />的diabled属性在IE仍可点击解决办法"
+title:      `${<a/>的diabled属性在IE仍可点击解决办法}`
+subtitle:   "a标签的diabled属性在IE仍可点击解决办法"
 date:       2018-07-16 14:12:06
 author:     "pompeygao"
 header-img: "img/post-bg-js-version.jpg"
@@ -75,4 +75,4 @@ columns = [
     }
 ];
 ```
-这样也解决了在IE11下面出现的问题。
+这样就解决了在IE11下面出现的问题。
