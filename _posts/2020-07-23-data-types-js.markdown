@@ -10,6 +10,16 @@ tags:
     - 数据类型
 ---
 
+- [数据类型](#数据类型)
+    - [Undefined/Null](#undefinednull)
+    - [Boolean](#boolean)
+    - [Number](#number)
+    - [String](#string)
+    - [Symbol](#symbol)
+    - [BigInt](#bigint)
+    - [Object](#object)
+- [装箱 拆箱](#装箱-拆箱)
+
 ## 数据类型
 
 最新的 ECMAScript 标准定义了 8种数据类型:
@@ -30,8 +40,7 @@ tags:
 - `Object`: `typeof instance === "object"`
 
 
-
-#### Undefined、Null
+#### Undefined/Null
 
 - `Undefined`类型的值只有一个 `undefined`。任何变量在赋值前都是`Undefined`类型、值为`undefined`。一般我们可以用全局变量`undefined`来表达这个值，或者用`void`运算把任意一个表达式变成`undefined`值。
 
@@ -50,9 +59,11 @@ tags:
 
 - `Undefined `跟 `Null `有一定的表意差别，`Null `表示的是：“定义了但是为空”。所以，在实际编程时，我们一般不会把变量赋值为 `undefined`，这样可以保证所有值为` undefined `的变量，都是从未赋值的自然状态。
 
+
 #### Boolean
 
 - 只有两个值 `true`和`false`。
+
 
 #### Number
 
@@ -93,7 +104,8 @@ tags:
      ```
   
   - 从上面的计算过程可以看出，0.1 和 0.2 在转换为二进制时就发生了一次精度丢失，而对于计算后的二进制又有一次精度丢失 。因此，得到的结果是不准确的。
-  
+
+
 #### String
 
 - JavaScript的字符串类型用于表示文本数据。它是一组16位的无符号整数值的“元素”。在字符串中的每个元素占据了字符串的位置。第一个元素的索引为0，下一个是索引1，依此类推。字符串的长度是它的元素的数量。
@@ -139,7 +151,7 @@ tags:
 
 
 
-#### 装箱 拆箱
+### 装箱 拆箱
 
 - 每一种基本类型 Number、String、Boolean、Symbol 在对象中都有对应的类
   - 所谓装箱转换，正是把基本类型转换为对应的对象，它是类型转换中一种相当重要的种类。
