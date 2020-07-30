@@ -59,7 +59,7 @@ kramdown:
 
 # Analytics settings
 # Baidu Analytics
-ba_track_id: b11e9b914b9a4ce153e61b1fcbf99745
+ba_track_id: 0997439a93de3e11c3de8691bb254acb
 # Google Analytics
 # ga_track_id: 'UA-49627206-1'            # Format: UA-xxxxxx-xx
 # ga_domain: huangxuan.me
