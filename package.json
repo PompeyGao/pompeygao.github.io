@@ -17,6 +17,7 @@
     },
     "scripts": {
         "preview": "cd _site & python -m http.server 8020",
-        "watch": "grunt watch & npm run preview & jekyll serve -w;"
+        "watch": "grunt watch & npm run preview & jekyll serve -w;",
+        "start": "jekyll serve --trace"
     }
 }

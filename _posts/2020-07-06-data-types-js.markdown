@@ -2,7 +2,7 @@
 layout:     post
 title:      "JavaScript数据类型"
 subtitle:   "JavaScript类型：关于类型，有哪些你不知道的细节？"
-date:       2020-07-23
+date:       2020-07-06
 author:     "pompeygao"
 header-img: "img/post-bg-unix-linux.jpg"
 tags:
@@ -12,13 +12,11 @@ tags:
 
 - [数据类型](#数据类型)
     - [Undefined/Null](#undefinednull)
-    - [Boolean](#boolean)
-    - [Number](#number)
     - [String](#string)
     - [Symbol](#symbol)
     - [BigInt](#bigint)
     - [Object](#object)
-- [装箱 拆箱](#装箱-拆箱)
+  - [装箱 拆箱](#装箱-拆箱)
 
 ## 数据类型
 
